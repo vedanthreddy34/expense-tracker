@@ -1,0 +1,38 @@
+expenses = []
+
+def add():
+    item = input("Item: ").strip()
+    try:
+        amount = float(input("Amount: "))
+    except ValueError:
+        print("Invalid amount.")
+        return
+    expenses.append({"item": item, "amount": amount})
+    print("Added!")
+
+def view():
+    if not expenses:
+        print("Nothing here.")
+        return
+    for i, e in enumerate(expenses, 1):
+        print(f"{i}. {e['item']} - Rs.{e['amount']}")
+    print("Total: Rs.", sum(e["amount"] for e in expenses))
+
+def delete():
+    name = input("Item to delete: ").lower()
+    for e in expenses:
+        if e["item"].lower() == name:
+            expenses.remove(e)
+            print("Deleted!")
+            return
+    print("Not found.")
+
+while True:
+    print("\n1.Add  2.View  3.Delete  4.Exit")
+    c = input("> ")
+    if c == "1": add()
+    elif c == "2": view()
+    elif c == "3": delete()
+    elif c == "4": break
+    else: print("Invalid.")
+
